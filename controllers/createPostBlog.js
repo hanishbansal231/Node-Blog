@@ -40,6 +40,13 @@ exports.getPostId = async (req,res) => {
    try{
     const id = req.params.id;
     const getData = await Post.findById({_id:id});
+    if(!getData){
+        res.status(402).json({
+            success: false,
+            data: getData,
+            message: "Data Not Found"
+        });
+    }
     res.status(200).json({
         success: true,
         data: getData,
@@ -52,4 +59,43 @@ exports.getPostId = async (req,res) => {
         message: "Internal Issues Face"
     })
    }
+}
+
+exports.updatePost = async (req,res) => {
+    try{
+        const {title,body} = req.body;
+        const {id} = req.params;
+        const updateData = await Post.findByIdAndUpdate(
+            {_id:id},
+            {title,body}
+        )
+        res.status(200).json({
+            success: true,
+            data: updateData,
+            message: 'Updated Message..',
+        })
+    }catch(err){
+        console.error(err);
+        res.status(500).json({
+            success: false,
+            message: 'Interal Error',
+        })
+    }
+}
+
+exports.deletePost = async (req,res) => {
+    try{
+        const id = req.params.id;
+        await Post.findByIdAndDelete(id);
+        res.status(200).json({
+            success: true,
+            message: "Delete Successfully",
+        })
+    }catch(err){
+        console.error(err);
+        res.status(500).json({
+            success: false,
+            message: 'Internal Error',
+        })
+    }
 }
