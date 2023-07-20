@@ -9,14 +9,14 @@ const postSchema = new mongoose.Schema({
         type: String,
         require: true,
     },
-    likes:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "like",
-      },
-      comments:{
+    likes:[{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "like",
+    }],
+      comments:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: "comment",
-      }
+      }]
 })
 
 module.exports = mongoose.model('Post',postSchema);

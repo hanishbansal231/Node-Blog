@@ -1,13 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const {dummyRouter} = require('../controllers/commentBlog');
 const {createPost,getPost,getPostId,updatePost,deletePost} = require('../controllers/createPostBlog');
+const {createComment} = require('../controllers/commentBlog');
+const {likePost} = require('../controllers/likeUnlikeBlog');
 
-router.get('/dummy',dummyRouter);
+
 router.post('/createPost',createPost);
 router.get('/getPost',getPost);
 router.get('/getPost/:id',getPostId);
 router.put('/updatePost/:id',updatePost);
 router.delete('/deletePost/:id',deletePost);
+router.post('/createComment',createComment);
+router.post('/likePost',likePost);
+// router.post('/deleteComment',deleteComment);
 
 module.exports = router;
