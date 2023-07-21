@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const {createPost,getPost,getPostId,updatePost,deletePost} = require('../controllers/createPostBlog');
 const {createComment} = require('../controllers/commentBlog');
-const {likePost} = require('../controllers/likeUnlikeBlog');
+const {likePost,unLikePost} = require('../controllers/likeUnlikeBlog');
 
 
 router.post('/createPost',createPost);
@@ -12,6 +12,6 @@ router.put('/updatePost/:id',updatePost);
 router.delete('/deletePost/:id',deletePost);
 router.post('/createComment',createComment);
 router.post('/likePost',likePost);
-// router.post('/deleteComment',deleteComment);
+router.post('/unLikePost',unLikePost);
 
 module.exports = router;
